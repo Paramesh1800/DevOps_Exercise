@@ -16,3 +16,6 @@ logs/*
 # Virtual environment
 .venv/
 venv/
+
+# Restored test files
+restore/
