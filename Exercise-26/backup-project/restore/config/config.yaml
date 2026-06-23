@@ -1,7 +1,0 @@
-application:
-  name: payment-service
-  environment: dev
-
-database:
-  host: localhost
-  port: 3306

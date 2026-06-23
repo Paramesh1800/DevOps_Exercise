@@ -1,0 +1,18 @@
+# Python cache
+__pycache__/
+*.pyc
+
+# Local backup directory
+backups/*
+!backups/.gitkeep
+
+# Local logs directory
+logs/*
+!logs/.gitkeep
+
+# Environment variables & secrets
+.env
+
+# Virtual environment
+.venv/
+venv/
