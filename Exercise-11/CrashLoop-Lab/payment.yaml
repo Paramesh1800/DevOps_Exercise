@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: payment-service
+  namespace: crashlab
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: payment
+
+  template:
+    metadata:
+      labels:
+        app: payment
+
+    spec:
+      containers:
+      - name: payment
+
+        image: busybox
+
+        command:
+        - sh
+        - -c
+        - |
+          echo "Starting Payment Service..."
+
+          nc -z postgres 5432
+
+          if [ $? -ne 0 ]; then
+            echo "panic: dial tcp postgres:5432 connection refused"
+            exit 1
+          fi
+
+          echo "Database Connected"
+
+          sleep 3600
