@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-generator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logger
+  template:
+    metadata:
+      labels:
+        app: logger
+    spec:
+      containers:
+      - name: logger
+        image: busybox
+        command:
+        - sh
+        - -c
+        - |
+          while true
+          do
+            echo "$(date) ERROR: Sample application log"
+            sleep 0.01
+          done
