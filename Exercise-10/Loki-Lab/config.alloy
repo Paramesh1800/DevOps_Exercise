@@ -1,0 +1,17 @@
+local.file_match "logs" {
+  path_targets = [{
+    __path__ = "/var/log/app/app.log",
+    job = "application"
+  }]
+}
+
+loki.source.file "log_source" {
+  targets    = local.file_match.logs.targets
+  forward_to = [loki.write.local.receiver]
+}
+
+loki.write "local" {
+  endpoint {
+    url = "http://loki:3100/loki/api/v1/push"
+  }
+}
