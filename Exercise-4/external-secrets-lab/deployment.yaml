@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: payment-app
+  namespace: demo
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: payment-app
+
+  template:
+    metadata:
+      labels:
+        app: payment-app
+
+    spec:
+      containers:
+      - name: payment-app
+        image: nginx:latest
+
+        env:
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: DB_PASSWORD
